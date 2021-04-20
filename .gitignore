@@ -1,0 +1,10 @@
+node_modules/
+dist/
+doc/notes.md
+.idea
+
+.husky/
+
+coverage/
+
+src/ts/*.js
