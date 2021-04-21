@@ -20,8 +20,6 @@ describe('Parallel', () => {
   });
 
   it('runs acceptance test', async () => {
-    // jest.setTimeout(30000)
-    //const jobs = [jest.fn(), jest.fn(), jest.fn()];
     const jobs = [
       () => new Promise((resolve) => setTimeout(resolve, 10, 1)),
       () => new Promise((resolve) => setTimeout(resolve, 50, 2)),
@@ -74,6 +72,7 @@ describe('Parallel', () => {
      1333444444447777777888888888888
      222222555556666666666999999999
      */
+    console.log('jobsInOrder', jobsInOrder, 'exp', [1, 3, 2, 5, 4, 7, 6, 9, 8]);
     expect(jobsInOrder).toEqual([1, 3, 2, 5, 4, 7, 6, 9, 8]);
   });
 
