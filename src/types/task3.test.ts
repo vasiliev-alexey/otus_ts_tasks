@@ -1,6 +1,4 @@
 import { omit } from './task3';
-import { expectError, expectNotAssignable } from 'tsd';
-import { FIXME } from './task3';
 
 describe('test3 ', function () {
   it('no test defined', function () {

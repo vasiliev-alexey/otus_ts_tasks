@@ -3,6 +3,7 @@
 
 namespace React {
   export type DefaultProps = Record<string, string>[];
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   export interface ComponentType<T> {
     defaultProps: DefaultProps;
   }
