@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-export function curry(fn: Function, ...args: number[]) {
-  return function (...partArg: number[]) {
-    const allArgs = args.concat(partArg);
-    if (allArgs.length >= fn.length) {
-      return fn(...allArgs);
-    } else {
-      return curry(fn, ...allArgs);
-    }
-=======
 type PartialArgs<T extends (...args: number[]) => number> = T extends (
   ...args: infer TArgs
 ) => number
@@ -40,6 +30,5 @@ export function curry(fn: (...args: number[]) => number): any {
     return function f2(...moreArgs: number[]) {
       return carred(...args.concat(moreArgs));
     };
->>>>>>> master
   };
 }

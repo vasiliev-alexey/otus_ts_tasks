@@ -1,4 +1,4 @@
-import {FIXME, getUserOrderStates, orderStates} from './task1';
+import { FIXME, getUserOrderStates, orderStates } from './task1';
 import { expectAssignable, expectNotAssignable, expectType } from 'tsd';
 
 describe('test1 function', function () {
@@ -8,13 +8,14 @@ describe('test1 function', function () {
     expectAssignable<FIXME>([
       'initial',
       'inWork',
-     //   "buyingSupplies",
+      //   "buyingSupplies",
       //  "producing",
       'fullfilled',
     ]);
 
-    const t  = orderStates.find( el => el === "buyingSupplies") as typeof orderStates[number];
+    const t = orderStates.find(
+      (el) => el === 'buyingSupplies'
+    ) as typeof orderStates[number];
     expectNotAssignable<FIXME>(t);
-
   });
 });

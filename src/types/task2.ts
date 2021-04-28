@@ -30,6 +30,6 @@ export type Order =
       fullfillmentDate: Date;
     };
 
-export type FIXME =  Order['state'];
+export type FIXME = Order['state'];
 
 export const getOrderState = (order: Order): FIXME => order.state;
