@@ -36,7 +36,10 @@
     "prettier": "^2.2.1",
     "style-loader": "^2.0.0",
     "ts-jest": "^26.5.4",
+<<<<<<< HEAD
     "tsd": "^0.14.0",
+=======
+>>>>>>> master
     "typescript": "^4.2.4",
     "typescript-eslint": "^0.0.1-alpha.0"
   },
