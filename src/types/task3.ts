@@ -2,7 +2,7 @@
 // Нужно заменить FIXME на соответствующий тип
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type FIXME<T, K extends keyof T> = Omit<T, K>;
+export type FIXME<T, K extends keyof T> = Omit<T, K>;
 //type FIXME  = any;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
