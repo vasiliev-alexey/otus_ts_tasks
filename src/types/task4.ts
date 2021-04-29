@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface workerId {
   workerId: number;
 }
@@ -7,11 +6,6 @@ export type FIXME<T extends Order> =
   | Pick<T, 'state' | 'sum'>
   | (Pick<T, 'state' | 'sum'> & workerId)
   | null;
-
-// Есть объединение (юнион) типов заказов в различных состояниях
-// и функция filterOnlyInitialAndInWorkOrder которая принимает заказы в любых состояниях
-// А возвращает только initial и inWork
-// Нужно заменить FIXME на правильный тип вычисленный на основе Order
 
 export type Order =
   | {

@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-
 export const orderStates = [
   'initial',
   'inWork',
@@ -10,10 +8,10 @@ export const orderStates = [
 
 type OrderState = typeof orderStates[number];
 
-export type FIXME = Omit<OrderState, 'buyingSupplies' | 'producing'>[];
+export type FIXME = Exclude<OrderState, 'buyingSupplies' | 'producing'>[];
 
-// Hint: type guards
 export const getUserOrderStates = (orderStatesParam: OrderState[]): FIXME =>
+  // @ts-ignore
   orderStatesParam.filter(
     (state) => state !== 'buyingSupplies' && state !== 'producing'
   );

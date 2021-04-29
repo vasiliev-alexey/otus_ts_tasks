@@ -1,12 +1,3 @@
-// Задача состоит в том что написать калькулято для натуральных чисел, но только на типах!
-// Ниже приведена заготовка
-// Хочется поддержки сложения и вычитания, если хочется еще челленджа, то деление и умножение
-// Из-за ограничений глубины вычислений поддержать все натуральные числа не получится, это нормально
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-type FIXME = any;
-
 type Equals<A, B> = A extends B ? (B extends A ? 'success' : never) : never;
 
 type BuildTuple<L extends number, T extends any[] = []> = T extends {
@@ -21,7 +12,7 @@ type Length<T extends any[]> = T extends { length: infer L } ? L : never;
 type Add<A extends number, B extends number> = Length<
   [...BuildTuple<A>, ...BuildTuple<B>]
 >;
-// Взять  длину остаточных параметров от кортежа длиной А и объединеного с кортежем B ;)
+// Взять  длину остаточных параметров от кортежа длиной А и объединенного с кортежем B ;)
 type Subtract<A extends number, B extends number> = BuildTuple<A> extends [
   ...infer U,
   ...BuildTuple<B>

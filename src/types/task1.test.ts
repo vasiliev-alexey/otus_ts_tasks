@@ -5,13 +5,7 @@ describe('test1 function', function () {
   it('getUserOrderStates function should return type of  FIXMУ without Error', function () {
     expectType<FIXME>(getUserOrderStates([]));
 
-    expectAssignable<FIXME>([
-      'initial',
-      'inWork',
-      //   "buyingSupplies",
-      //  "producing",
-      'fullfilled',
-    ]);
+    expectAssignable<FIXME>(['initial', 'inWork', 'fullfilled']);
 
     const t = orderStates.find(
       (el) => el === 'buyingSupplies'
