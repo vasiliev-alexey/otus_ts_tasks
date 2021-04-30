@@ -1,7 +1,5 @@
 import { Issue } from '../model/Issue';
 import { LocalStorage } from './LocalStorageService';
-import LocalStorageService = LocalStorage.LocalStorageService;
-import IssueLocalStorageService = LocalStorage.IssueLocalStorageService;
 
 describe('Test suit LocalStorageService', function () {
   beforeEach(() => {
@@ -9,12 +7,11 @@ describe('Test suit LocalStorageService', function () {
   });
 
   it('class should by function', function () {
-    expect(LocalStorageService).toBeInstanceOf(Function);
-    expect(IssueLocalStorageService).toBeInstanceOf(Function);
+    expect(LocalStorage.IssueLocalStorageService).toBeInstanceOf(Function);
   });
 
   it('LocalStorageRepository should save and get Data[]', function () {
-    const localStorage = new IssueLocalStorageService();
+    const localStorage = new LocalStorage.IssueLocalStorageService();
     let issue = new Issue();
     issue.Id = Math.trunc(Math.random() * 10000);
     issue.Title = `data ${Math.random() * 3}`;
@@ -26,7 +23,7 @@ describe('Test suit LocalStorageService', function () {
   });
 
   it('LocalStorageRepository should save single', function () {
-    const localStorage = new IssueLocalStorageService();
+    const localStorage = new LocalStorage.IssueLocalStorageService();
     let issue = new Issue();
     issue.Id = Math.trunc(Math.random() * 10000);
     issue.Title = `data ${Math.random() * 3}`;

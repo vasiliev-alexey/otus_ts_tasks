@@ -11,6 +11,9 @@ describe('Test suit IssueRepository Repository', function () {
   let testedClassDependencyMock: AbstractStorage<Issue>;
 
   beforeEach(() => {
+
+    SampleData = [];
+
     testedClassDependencyMock = (mocked({
       GetStoredObject: jest.fn(() => {
         return SampleData;

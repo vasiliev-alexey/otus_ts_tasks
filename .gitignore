@@ -8,3 +8,4 @@ doc/notes.md
 coverage/
 
 src/ts/*.js
+myDataBase.json
