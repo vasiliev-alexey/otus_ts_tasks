@@ -10,4 +10,5 @@ export class Issue extends DomaiObject {
   public Title: string;
   public IssueDate: Date;
   public Status: IssueStatus;
+  public Tags: string[] = [];
 }
