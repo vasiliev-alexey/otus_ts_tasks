@@ -7,7 +7,8 @@ export namespace LocalStorage {
   export abstract class LocalStorageService<
     T extends DomainObject,
     K extends string
-  > implements AbstractStorage<T> {
+  > implements AbstractStorage<T>
+  {
     constructor(private collectionKey: K) {}
 
     GetStoredObject(): T[] {

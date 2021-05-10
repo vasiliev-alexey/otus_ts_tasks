@@ -9,7 +9,8 @@ const db = new JsonDB(new Config('myDataBase', true, false, '/'));
 
 export namespace JSONDbStorage {
   class JSONDbStorageService<T extends DomainObject, K extends string>
-    implements AbstractStorage<T> {
+    implements AbstractStorage<T>
+  {
     protected constructor(private collectionKey: K) {}
 
     GetStoredObject(): T[] {

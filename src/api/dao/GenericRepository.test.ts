@@ -13,13 +13,13 @@ describe('Test suit IssueRepository Repository', function () {
   beforeEach(() => {
     SampleData = [];
 
-    testedClassDependencyMock = (mocked({
+    testedClassDependencyMock = mocked({
       GetStoredObject: jest.fn(() => {
         return SampleData;
       }),
       SaveArrayObject: jest.fn(() => {}),
       SaveSingleObject: jest.fn(() => {}),
-    }) as unknown) as AbstractStorage<Issue>;
+    }) as unknown as AbstractStorage<Issue>;
 
     for (let i = 0; i < 10; i++) {
       let tmpIssue = new Issue();
