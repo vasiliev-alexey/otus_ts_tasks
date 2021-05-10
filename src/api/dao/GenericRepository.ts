@@ -1,7 +1,7 @@
-import { DomaiObject } from '../model/DomaiObject';
+import { DomainObject } from '../model/DomainObject';
 import { Issue, IssueStatus } from '../model/Issue';
 
-export interface GenericRepository<T extends DomaiObject> {
+export interface GenericRepository<T extends DomainObject> {
   findById(id: Number): Promise<Issue | undefined>;
 
   remove(domainObject: T): Promise<undefined>;
@@ -9,8 +9,6 @@ export interface GenericRepository<T extends DomaiObject> {
   update(domainObject: T): Promise<Issue | undefined>;
 
   create(domainObject: T): Promise<T>;
-
-  // findBy(predicate :( val: T) => boolean): Promise<T[]>;
 }
 export interface IssueFinder {
   findByTitle(Title: string): Promise<Issue[]>;

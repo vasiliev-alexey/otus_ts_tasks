@@ -1,11 +1,11 @@
-import { DomaiObject } from './DomaiObject';
+import { DomainObject } from './DomainObject';
 
 export enum IssueStatus {
   NEW = 'New',
   CANCELED = 'Canceled',
 }
 
-export class Issue extends DomaiObject {
+export class Issue extends DomainObject {
   public Id: Number;
   public Title: string;
   public IssueDate: Date;

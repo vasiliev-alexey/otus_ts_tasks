@@ -1,4 +1,4 @@
-import { DomaiObject } from '../model/DomaiObject';
+import { DomainObject } from '../model/DomainObject';
 import { AbstractStorage } from './AbstractStorage';
 
 import { JsonDB } from 'node-json-db';
@@ -8,7 +8,7 @@ import { Issue } from '../model/Issue';
 const db = new JsonDB(new Config('myDataBase', true, false, '/'));
 
 export namespace JSONDbStorage {
-  abstract class JSONDbStorageService<T extends DomaiObject, K extends string>
+  class JSONDbStorageService<T extends DomainObject, K extends string>
     implements AbstractStorage<T> {
     protected constructor(private collectionKey: K) {}
 

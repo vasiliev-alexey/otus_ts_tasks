@@ -2,8 +2,11 @@ import { Issue } from '../model/Issue';
 import { LocalStorage } from './LocalStorageService';
 
 describe('Test suit LocalStorageService', function () {
+  let localStorageService: LocalStorage.IssueLocalStorageService;
+
   beforeEach(() => {
     localStorage.clear();
+    localStorageService = new LocalStorage.IssueLocalStorageService();
   });
 
   it('class should by function', function () {
@@ -11,25 +14,23 @@ describe('Test suit LocalStorageService', function () {
   });
 
   it('LocalStorageRepository should save and get Data[]', function () {
-    const localStorage = new LocalStorage.IssueLocalStorageService();
     let issue = new Issue();
     issue.Id = Math.trunc(Math.random() * 10000);
     issue.Title = `data ${Math.random() * 3}`;
     issue.IssueDate = new Date(Math.random());
-    localStorage.SaveArrayObject([issue]);
-    const data = localStorage.GetStoredObject();
+    localStorageService.SaveArrayObject([issue]);
+    const data = localStorageService.GetStoredObject();
     expect(data).not.toBeNull();
     expect(data).toEqual([issue]);
   });
 
   it('LocalStorageRepository should save single', function () {
-    const localStorage = new LocalStorage.IssueLocalStorageService();
     let issue = new Issue();
     issue.Id = Math.trunc(Math.random() * 10000);
     issue.Title = `data ${Math.random() * 3}`;
     issue.IssueDate = new Date(Math.random());
-    localStorage.SaveSingleObject(issue);
-    const data = localStorage.GetStoredObject();
+    localStorageService.SaveSingleObject(issue);
+    const data = localStorageService.GetStoredObject();
     expect(data).not.toBeNull();
     expect(data.length).toEqual(1);
     expect(data[0]).toEqual(issue);

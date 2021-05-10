@@ -1,11 +1,11 @@
 import { AbstractStorage } from './AbstractStorage';
 import * as Logger from 'debug';
-import { DomaiObject } from '../model/DomaiObject';
+import { DomainObject } from '../model/DomainObject';
 import { Issue } from '../model/Issue';
 
 export namespace LocalStorage {
   export abstract class LocalStorageService<
-    T extends DomaiObject,
+    T extends DomainObject,
     K extends string
   > implements AbstractStorage<T> {
     constructor(private collectionKey: K) {}
@@ -53,12 +53,12 @@ export namespace LocalStorage {
     Deserialize(json: string): Issue[] {
       let data = JSON.parse(json);
       return data.map((el: Object) => {
-        let iss = new Issue();
-        Object.assign(iss, el);
+        let issue = new Issue();
+        Object.assign(issue, el);
         if (el.hasOwnProperty('IssueDate')) {
-          iss['IssueDate'] = new Date(iss['IssueDate'].toString());
+          issue['IssueDate'] = new Date(issue['IssueDate'].toString());
         }
-        return iss;
+        return issue;
       });
     }
   }

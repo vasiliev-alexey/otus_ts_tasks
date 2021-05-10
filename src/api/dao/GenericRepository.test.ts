@@ -48,7 +48,7 @@ describe('Test suit IssueRepository Repository', function () {
   it('Repository find by ID', async () => {
     expect(IssueRepository).toBeInstanceOf(Function);
 
-    let repo = new IssueRepository(testedClassDependencyMock);
+    const repo = new IssueRepository(testedClassDependencyMock);
     let tmpIssue = await repo.findById(1);
 
     expect(tmpIssue).not.toBeUndefined();
@@ -59,15 +59,15 @@ describe('Test suit IssueRepository Repository', function () {
   });
 
   it('Repository  should delete item', async () => {
-    let repo = new IssueRepository(testedClassDependencyMock);
-    const removeIsssue: Issue = new Issue();
-    removeIsssue.Id = 1;
-    await repo.remove(removeIsssue);
+    const repo = new IssueRepository(testedClassDependencyMock);
+    const removeIssue: Issue = new Issue();
+    removeIssue.Id = 1;
+    await repo.remove(removeIssue);
     expect(testedClassDependencyMock.SaveArrayObject).toHaveBeenCalledTimes(1);
   });
 
   it('Repository  should update item', async () => {
-    let repo = new IssueRepository(testedClassDependencyMock);
+    const repo = new IssueRepository(testedClassDependencyMock);
     const updIssue: Issue = new Issue();
     updIssue.Id = 1;
     await repo.update(updIssue);
@@ -75,7 +75,7 @@ describe('Test suit IssueRepository Repository', function () {
   });
 
   it('Repository  should create item', async () => {
-    let repo = new IssueRepository(testedClassDependencyMock);
+    const repo = new IssueRepository(testedClassDependencyMock);
     const create: Issue = new Issue();
     create.Title = '22';
     await repo.create(create);
@@ -83,37 +83,37 @@ describe('Test suit IssueRepository Repository', function () {
   });
 
   it('Repository  should find by title', async () => {
-    let repo = new IssueRepository(testedClassDependencyMock);
-    let title = 'aaa';
-    // let pred : Function  =  (i: Issue) => {return i.Title = title };
-    let t = await repo.findByTitle(title);
-    expect(t.length).toEqual(1);
-    expect(t[0].Id).toEqual(3);
+    const repo = new IssueRepository(testedClassDependencyMock);
+    const title = 'aaa';
+
+    const tmpObject = await repo.findByTitle(title);
+    expect(tmpObject.length).toEqual(1);
+    expect(tmpObject[0].Id).toEqual(3);
     expect(testedClassDependencyMock.GetStoredObject).toHaveBeenCalledTimes(1);
   });
 
   it('Repository  should find by status', async () => {
-    let repo = new IssueRepository(testedClassDependencyMock);
-    let t = await repo.findByStatus(IssueStatus.NEW);
-    expect(t.length).toEqual(4);
-    expect(t[0].Id).toEqual(0);
+    const repo = new IssueRepository(testedClassDependencyMock);
+    const tmpObject = await repo.findByStatus(IssueStatus.NEW);
+    expect(tmpObject.length).toEqual(4);
+    expect(tmpObject[0].Id).toEqual(0);
     expect(testedClassDependencyMock.GetStoredObject).toHaveBeenCalledTimes(1);
   });
 
   it('Repository  should find by dateTime', async () => {
-    let repo = new IssueRepository(testedClassDependencyMock);
-    let t = await repo.findByDate(dateTime);
-    expect(t.length).toEqual(3);
-    expect(t[0].IssueDate).toEqual(dateTime);
+    const repo = new IssueRepository(testedClassDependencyMock);
+    const tmpObject = await repo.findByDate(dateTime);
+    expect(tmpObject.length).toEqual(3);
+    expect(tmpObject[0].IssueDate).toEqual(dateTime);
     expect(testedClassDependencyMock.GetStoredObject).toHaveBeenCalledTimes(1);
   });
 
   it('Repository  should find by Tags', async () => {
-    let repo = new IssueRepository(testedClassDependencyMock);
-    let t = await repo.findByTags('TS');
+    const repo = new IssueRepository(testedClassDependencyMock);
+    const tmpObject = await repo.findByTags('TS');
 
-    expect(t.length).toEqual(2);
-    expect(t[0].Tags).toEqual(['TS']);
+    expect(tmpObject.length).toEqual(2);
+    expect(tmpObject[0].Tags).toEqual(['TS']);
     expect(testedClassDependencyMock.GetStoredObject).toHaveBeenCalledTimes(1);
   });
 });

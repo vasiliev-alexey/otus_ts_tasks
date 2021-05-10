@@ -14,7 +14,7 @@ describe('Test suit LocalStorageService', function () {
     const localStorage = new JSONDbStorage.IssueJSONDbStorageService();
     const sampleData: Issue[] = [];
     for (let i = 0; i < 10; i++) {
-      let issue = new Issue();
+      const issue = new Issue();
       issue.Id = Math.trunc(Math.random() * 10000);
       issue.Title = `data ${Math.random() * 3}`;
       issue.IssueDate = new Date(Math.random() * 1000 + i * 100);
