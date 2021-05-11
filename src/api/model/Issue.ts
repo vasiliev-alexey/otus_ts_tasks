@@ -6,7 +6,6 @@ export enum IssueStatus {
 }
 
 export class Issue extends DomainObject {
-  public Id: Number;
   public Title: string;
   public IssueDate: Date;
   public Status: IssueStatus;

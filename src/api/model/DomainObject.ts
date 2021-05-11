@@ -1,3 +1,3 @@
 export abstract class DomainObject {
-  abstract Id: Number;
+  Id: Number;
 }
