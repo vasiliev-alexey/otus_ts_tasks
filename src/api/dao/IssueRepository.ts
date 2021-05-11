@@ -1,80 +1,75 @@
-import { GenericRepository, IssueFinder } from './GenericRepository';
+import { DomainRepository, IssueFinder } from './DomainRepository';
 import { Issue, IssueStatus } from '../model/Issue';
-import { AbstractStorage } from '../storage/AbstractStorage';
+import { Storage } from '../storage/Storage';
 
-export class IssueRepository implements GenericRepository<Issue>, IssueFinder {
-  private storage: AbstractStorage<Issue>;
+export class IssueRepository implements DomainRepository<Issue>, IssueFinder {
+  private storage: Storage<Issue>;
 
-  constructor(storage: AbstractStorage<Issue>) {
+  constructor(storage: Storage<Issue>) {
     this.storage = storage;
   }
 
-  async findByTitle(Title: string): Promise<Issue[]> {
-    return this.findBy((i) => i.Title === Title);
+  async filterByTitle(Title: string): Promise<Issue[]> {
+    return this.filterBy((i) => i.Title === Title);
   }
 
-  async findByStatus(Status: IssueStatus): Promise<Issue[]> {
-    return this.findBy((i) => i.Status === Status);
+  async filterByStatus(Status: IssueStatus): Promise<Issue[]> {
+    return this.filterBy((i) => i.Status === Status);
   }
 
-  async findByDate(IssueDate: Date): Promise<Issue[]> {
-    return this.findBy((i) => i.IssueDate === IssueDate);
+  async filterByDate(IssueDate: Date): Promise<Issue[]> {
+    return this.filterBy((i) => i.IssueDate === IssueDate);
   }
 
   async findByTags(Tag: string): Promise<Issue[]> {
-    return this.findBy(
+    return this.filterBy(
       (i) => i.Tags?.length > 0 && i.Tags.some((t) => t === Tag)
     );
   }
 
-  private async findBy(predicate: (val: Issue) => boolean): Promise<Issue[]> {
-    let data = this.storage.GetStoredObject();
-    return Promise.resolve(
-      data.filter((d) => {
-        return predicate.call(this, d);
-      })
-    );
+  private async filterBy(predicate: (val: Issue) => boolean): Promise<Issue[]> {
+    let data = await this.storage.getStoredObject();
+    return data.filter((d) => {
+      return predicate(d);
+    });
   }
 
-  async create(domainObject: Issue): Promise<Issue | never> {
+  async create(domainObject: Issue): Promise<Issue> {
     if (domainObject.Id !== undefined) {
       throw new Error('object can not be persist');
     }
-
-    this.storage.SaveSingleObject(domainObject);
-
-    return Promise.resolve(domainObject);
+    await this.storage.saveSingleObject(domainObject);
+    return domainObject;
   }
 
-  findById(id: Number): Promise<Issue | undefined> {
-    let data = this.storage.GetStoredObject();
-    return Promise.resolve(data.find((iss) => iss.Id === id));
+  async findById(id: Number): Promise<Issue | undefined> {
+    let data = await this.storage.getStoredObject();
+    return data.find((iss) => iss.Id === id);
   }
 
-  remove(domainObject: Issue): Promise<undefined> {
-    let data = this.storage.GetStoredObject();
+  async remove(domainObject: Issue): Promise<undefined> {
+    let data = await this.storage.getStoredObject();
     const ind = data.some((el) => el.Id === domainObject.Id);
 
-    if (!ind) {
-      return Promise.resolve(undefined);
+    if (ind) {
+      data = data.filter((iss) => iss.Id !== domainObject.Id);
+      await this.storage.saveArrayObject(data);
     }
-
-    data = data.filter((iss) => iss.Id !== domainObject.Id);
-    this.storage.SaveArrayObject(data);
-    return Promise.resolve(undefined);
+    return undefined;
   }
 
-  update(domainObject: Issue): Promise<Issue | undefined> {
-    let data = this.storage.GetStoredObject();
+  async update(domainObject: Issue): Promise<Issue | undefined> {
+    let data = await this.storage.getStoredObject();
 
     const ind = data.some((el) => el.Id === domainObject.Id);
 
     if (!ind) {
-      return Promise.resolve(undefined);
+      return undefined;
     }
 
     data = data.filter((iss) => iss.Id !== domainObject.Id);
-    this.storage.SaveArrayObject(data);
-    return Promise.resolve(domainObject);
+    data.push(domainObject);
+    await this.storage.saveArrayObject(data);
+    return domainObject;
   }
 }

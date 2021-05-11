@@ -1,4 +1,4 @@
-import { AbstractStorage } from './AbstractStorage';
+import { Storage } from './Storage';
 import * as Logger from 'debug';
 import { DomainObject } from '../model/DomainObject';
 import { Issue } from '../model/Issue';
@@ -7,11 +7,11 @@ export namespace LocalStorage {
   export abstract class LocalStorageService<
     T extends DomainObject,
     K extends string
-  > implements AbstractStorage<T>
+  > implements Storage<T>
   {
-    constructor(private collectionKey: K) {}
+    protected constructor(private collectionKey: K) {}
 
-    GetStoredObject(): T[] {
+    async getStoredObject(): Promise<T[]> {
       const storageData = localStorage.getItem(this.collectionKey)!;
       if (storageData === null) {
         return [];
@@ -19,10 +19,10 @@ export namespace LocalStorage {
       return this.Deserialize(storageData);
     }
 
-    SaveArrayObject(data: T[]): void {
+    async saveArrayObject(data: T[]): Promise<void> {
       Logger.log('LocalStorageRepository save', data);
 
-      const savedData = this.GetStoredObject();
+      const savedData = await this.getStoredObject();
 
       data.map((item) => {
         let existData = savedData.indexOf(item);
@@ -36,8 +36,8 @@ export namespace LocalStorage {
       localStorage.setItem(this.collectionKey, JSON.stringify(savedData));
     }
 
-    SaveSingleObject(data: T): void {
-      this.SaveArrayObject([data]);
+    async saveSingleObject(data: T): Promise<void> {
+      await this.saveArrayObject([data]);
     }
 
     public abstract Deserialize(json: string): T[];
@@ -57,7 +57,7 @@ export namespace LocalStorage {
         let issue = new Issue();
         Object.assign(issue, el);
         if (el.hasOwnProperty('IssueDate')) {
-          issue['IssueDate'] = new Date(issue['IssueDate'].toString());
+          issue['IssueDate'] = new Date(issue['IssueDate']);
         }
         return issue;
       });
