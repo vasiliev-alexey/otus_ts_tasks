@@ -6,4 +6,9 @@
 module.exports = {
   clearMocks: true,
   resetMocks: true,
+  globals: {
+    'ts-jest': {
+      diagnostics: false,
+    },
+  },
 };
